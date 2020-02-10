@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<displays>
+<display id="04e5e018-014a-1000-8001-ac193119805c" type="" style="Table" enable="true">
+<name><![CDATA[get tracefiles]]></name>
+<description><![CDATA[create a list of tracefiles as listed in GV$DIAG_TRACE_FILE and makes specific files available]]></description>
+<tooltip><![CDATA[create a list of tracefiles in DIAG directory and makes specific files available ]]></tooltip>
+<drillclass><![CDATA[null]]></drillclass>
+<CustomValues>
+<TYPE>horizontal</TYPE>
+</CustomValues>
+<query>
+<sql><![CDATA[select TRACE_FILENAME as TRACE_NAME ,
+ MODIFY_TIME as FILEDATE
+from gV$DIAG_TRACE_FILE
+Order By MODIFY_TIME desc]]></sql>
+</query>
+<pdf version="VERSION_1_7" compression="CONTENT">
+<docproperty title="-" author="berx" subject="-" keywords="-" />
+<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+<column>
+<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+<blob blob="EMBED" zip="false" />
+</column>
+<table font="Agency FB" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+<header enable="false" generatedate="false">
+<data>
+  
+null                                                               </data>
+</header>
+<footer enable="false" generatedate="false">
+<data value="null" />
+</footer>
+<security enable="false" useopenpassword="false" openpassword="null" encryption="EXCLUDE_METADATA">
+<permission enable="false" permissionpassword="null" allowcopying="true" allowprinting="true" allowupdating="false" allowaccessdevices="true" />
+</security>
+<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+</pdf>
+<display id="null" type="" style="Table" enable="true">
+<name><![CDATA[get tracefile]]></name>
+<description><![CDATA[access the specific tracefile ]]></description>
+<tooltip><![CDATA[Specific tracefile from list above ]]></tooltip>
+<drillclass><![CDATA[null]]></drillclass>
+<CustomValues>
+<TYPE>horizontal</TYPE>
+</CustomValues>
+<query>
+<sql><![CDATA[with function get_tracefile (filename varchar2) return CLOB IS
+-- PRAGMA AUTONOMOUS_TRANSACTION;
+-- to avoid ORA-14553: cannot perform a lob write operation inside a query 
+-- only required in dedicated function
+--
+-- in a dedicated function, this grant is required:
+-- grant select on sys.V_$DIAG_TRACE_FILE_CONTENTS to xxx;
+  l_out CLOB := EMPTY_CLOB;
+  CURSOR all_payload (fn varchar2)
+  is 
+  Select Payload
+  from gV$DIAG_TRACE_FILE_CONTENTS 
+  where trace_filename=nvl(fn,'a')
+    and payload is not null
+  order by line_number asc;
+begin
+  NULL;
+    
+   DBMS_LOB.CREATETEMPORARY(l_out, FALSE, DBMS_LOB.CALL);
+ 
+  for r_payload in all_payload(filename)
+  loop
+    DBMS_lob.append(l_out, r_payload.payload);
+  end loop;
+  return l_out;
+  DBMS_LOB.FREETEMPORARY(l_out);
+end get_tracefile;
+function get_tracefile_blob (filename varchar2) return BLOB IS
+-- PRAGMA AUTONOMOUS_TRANSACTION;
+-- to avoid ORA-14553: cannot perform a lob write operation inside a query 
+-- only required in dedicated function
+--
+-- in a dedicated function, this grant is required:
+-- grant select on sys.V_$DIAG_TRACE_FILE_CONTENTS to xxx;
+  l_out BLOB := EMPTY_BLOB;
+  CURSOR all_payload (fn varchar2)
+  is 
+  Select Payload
+  from gV$DIAG_TRACE_FILE_CONTENTS 
+  where trace_filename=vl(fn,'a')
+    and payload is not null
+  order by line_number asc;
+begin
+  NULL;
+   DBMS_LOB.CREATETEMPORARY(l_out, FALSE, DBMS_LOB.CALL);
+  for r_payload in all_payload(filename)
+  loop
+    DBMS_lob.append(l_out, utl_raw.cast_to_raw(r_payload.payload));
+  end loop;
+  return l_out;
+  DBMS_LOB.FREETEMPORARY(l_out);
+end get_tracefile_blob ;
+select get_tracefile(:TRACE_NAME) as " Tracefile", get_tracefile_blob(:TRACE_NAME) as " Binary Tracefile " from dual]]></sql>
+<binds>
+<bind id="TRACE_NAME">
+<prompt><![CDATA[TRACE_NAME]]></prompt>
+<tooltip><![CDATA[TRACE_NAME]]></tooltip>
+<value><![CDATA[NULL_VALUE]]></value>
+<bracket><![CDATA[null]]></bracket>
+</bind>
+</binds>
+</query>
+<pdf version="VERSION_1_7" compression="CONTENT">
+<docproperty title="-" author="-" subject="-" keywords="-" />
+<cell toppadding="2" bottompadding="2" leftpadding="2" rightpadding="2" horizontalalign="LEFT" verticalalign="TOP" wrap="true" />
+<column>
+<heading font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="FIRST_PAGE" />
+<footing font="null" size="10" style="NORMAL" color="-16777216" rowshading="-1" labeling="NONE" />
+<blob blob="EMBED" zip="false" />
+</column>
+<table font="null" size="10" style="NORMAL" color="-16777216" userowshading="false" oddrowshading="-1" evenrowshading="-1" showborders="true" spacingbefore="12" spacingafter="12" horizontalalign="LEFT" />
+<header enable="false" generatedate="false">
+<data>
+  
+null          </data>
+</header>
+<footer enable="false" generatedate="false">
+<data value="null" />
+</footer>
+<security enable="false" useopenpassword="false" openpassword="null" encryption="EXCLUDE_METADATA">
+<permission enable="false" permissionpassword="null" allowcopying="true" allowprinting="true" allowupdating="false" allowaccessdevices="false" />
+</security>
+<pagesetup papersize="LETTER" orientation="1" measurement="in" margintop="1.0" marginbottom="1.0" marginleft="1.0" marginright="1.0" />
+</pdf>
+</display>
+</display>
+</displays>
