@@ -1,0 +1,173 @@
+Trace file /u01/app/oracle/diag/rdbms/cdb1/cdb1/trace/cdb1_ora_7593.trc
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.3.0.0.0
+Build label:    RDBMS_19.3.0.0.0DBRU_LINUX.X64_190417
+ORACLE_HOME:    /u01/app/oracle/product/19.0.0/dbhome_1
+System name:	Linux
+Node name:	o19c.localdomain
+Release:	4.14.35-1902.3.1.el7uek.x86_64
+Version:	#2 SMP Mon Jun 24 21:25:29 PDT 2019
+Machine:	x86_64
+Instance name: cdb1
+Redo thread mounted by this instance: 1
+Oracle process number: 55
+Unix process pid: 7593, image: oracle@o19c.localdomain
+
+
+*** 2020-06-20T15:45:23.885845-04:00 (PDB1(3))
+*** SESSION ID:(390.35198) 2020-06-20T15:45:23.885890-04:00
+*** CLIENT ID:() 2020-06-20T15:45:23.885900-04:00
+*** SERVICE NAME:(pdb1) 2020-06-20T15:45:23.885908-04:00
+*** MODULE NAME:(SQL*Plus) 2020-06-20T15:45:23.885917-04:00
+*** ACTION NAME:() 2020-06-20T15:45:23.885926-04:00
+*** CLIENT DRIVER:(SQL*PLUS) 2020-06-20T15:45:23.885934-04:00
+*** CONTAINER ID:(3) 2020-06-20T15:45:23.885943-04:00
+ 
+WAIT #140095687596808: nam='SQL*Net message to client' ela= 1 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008948760
+WAIT #140095687596808: nam='SQL*Net message from client' ela= 185 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008949758
+=====================
+PARSING IN CURSOR #140095687503864 len=52 dep=0 uid=124 oct=47 lid=124 tim=4008949841 hv=1029988163 ad='688d5cd0' sqlid='9babjv8yq8ru3'
+BEGIN DBMS_OUTPUT.GET_LINES(:LINES, :NUMLINES); END;
+END OF STMT
+PARSE #140095687503864:c=25,e=24,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=0,tim=4008949840
+BINDS #140095687503864:
+
+ Bind#0
+  oacdty=123 mxl=656(656) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=1400000 frm=00 csi=00 siz=680 off=0
+toid ptr value=6AF37390 length=16
+86B64B66F23D012EE053F706E80A06
+  kxsbbbfp=7f6a91b183d8  bln=656  avl=00  flg=15
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=03 fl2=1000000 frm=00 csi=00 siz=0 off=656
+  kxsbbbfp=7f6a91b18668  bln=22  avl=02  flg=01
+  value=15
+WAIT #140095687503864: nam='SQL*Net message to client' ela= 1 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008950132
+EXEC #140095687503864:c=250,e=250,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=0,tim=4008950156
+WAIT #140095687503864: nam='SQL*Net message from client' ela= 1526 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008951720
+CLOSE #140095687596808:c=17,e=16,dep=0,type=1,tim=4008951922
+CLOSE #140095687503864:c=28,e=28,dep=0,type=3,tim=4008951971
+=====================
+PARSING IN CURSOR #140095687589936 len=438 dep=0 uid=124 oct=47 lid=124 tim=4008952391 hv=2598300368 ad='6bbe2b90' sqlid='109z56yddxuqh'
+declare
+  dt varchar2(100);
+  cursor c1 is select * from table(bla.get_date() );
+  cursor c2 is select t.*  from table(bla.get_date() ) t;
+begin
+  open c1;
+  fetch c1 into dt;
+  dbms_output.put_line('c1 - ' || dt);
+
+  fetch c1 into dt;
+  dbms_output.put_line('c1 - ' || dt);
+
+  open c2 ;
+
+  fetch c2 into dt;
+  dbms_output.put_line('c2 - ' || dt);
+
+  fetch c1 into dt;
+  dbms_output.put_line('c1 - ' || dt);
+
+  close c1;
+  close c2;
+
+end;
+END OF STMT
+PARSE #140095687589936:c=373,e=373,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=0,tim=4008952390
+=====================
+PARSING IN CURSOR #140095687571848 len=36 dep=1 uid=124 oct=3 lid=124 tim=4008952899 hv=16363317 ad='6bce9ab8' sqlid='3w165fw0gmbtp'
+SELECT * FROM TABLE(BLA.GET_DATE() )
+END OF STMT
+PARSE #140095687571848:c=1,e=55,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=1,plh=3084797639,tim=4008952899
+EXEC #140095687571848:c=0,e=39,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=1,plh=3084797639,tim=4008953011
+WAIT #140095687571848: nam='PGA memory operation' ela= 13 p1=65536 p2=1 p3=0 obj#=-1 tim=4008953196
+=====================
+PARSING IN CURSOR #140095687775344 len=42 dep=2 uid=124 oct=3 lid=124 tim=4008954514 hv=2007005855 ad='63395620' sqlid='ff6cspjvu0ynz'
+Select '0 : 2020-06-20 15:45:23' from Dual
+END OF STMT
+PARSE #140095687775344:c=1381,e=1200,p=0,cr=0,cu=0,mis=1,r=0,dep=2,og=1,plh=1388734953,tim=4008954514
+EXEC #140095687775344:c=13,e=13,p=0,cr=0,cu=0,mis=0,r=0,dep=2,og=1,plh=1388734953,tim=4008954581
+FETCH #140095687775344:c=6,e=5,p=0,cr=0,cu=0,mis=0,r=1,dep=2,og=1,plh=1388734953,tim=4008954608
+STAT #140095687775344 id=1 cnt=1 pid=0 pos=1 obj=0 op='FAST DUAL  (cr=0 pr=0 pw=0 str=1 time=1 us cost=2 size=0 card=1)'
+CLOSE #140095687775344:c=1,e=0,dep=2,type=3,tim=4008954674
+FETCH #140095687571848:c=1576,e=1650,p=0,cr=0,cu=0,mis=0,r=1,dep=1,og=1,plh=3084797639,tim=4008954709
+=====================
+PARSING IN CURSOR #140095687763512 len=42 dep=2 uid=124 oct=3 lid=124 tim=4008955260 hv=4041507650 ad='6a1c14e0' sqlid='07vp9m3sf90u2'
+Select '1 : 2020-06-20 15:45:23' from Dual
+END OF STMT
+PARSE #140095687763512:c=458,e=458,p=0,cr=0,cu=0,mis=1,r=0,dep=2,og=1,plh=1388734953,tim=4008955260
+EXEC #140095687763512:c=11,e=11,p=0,cr=0,cu=0,mis=0,r=0,dep=2,og=1,plh=1388734953,tim=4008955314
+FETCH #140095687763512:c=4,e=4,p=0,cr=0,cu=0,mis=0,r=1,dep=2,og=1,plh=1388734953,tim=4008955337
+STAT #140095687763512 id=1 cnt=1 pid=0 pos=1 obj=0 op='FAST DUAL  (cr=0 pr=0 pw=0 str=1 time=0 us cost=2 size=0 card=1)'
+CLOSE #140095687763512:c=0,e=0,dep=2,type=3,tim=4008955451
+FETCH #140095687571848:c=707,e=706,p=0,cr=0,cu=0,mis=0,r=1,dep=1,og=1,plh=3084797639,tim=4008955467
+=====================
+PARSING IN CURSOR #140095687761008 len=40 dep=1 uid=124 oct=3 lid=124 tim=4008955539 hv=55703095 ad='6b762060' sqlid='7fwkap81p3xjr'
+SELECT T.* FROM TABLE(BLA.GET_DATE() ) T
+END OF STMT
+PARSE #140095687761008:c=413,e=38,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=1,plh=3084797639,tim=4008955538
+EXEC #140095687761008:c=17,e=17,p=0,cr=0,cu=0,mis=0,r=0,dep=1,og=1,plh=3084797639,tim=4008955592
+WAIT #140095687761008: nam='PGA memory operation' ela= 8 p1=65536 p2=1 p3=0 obj#=-1 tim=4008955655
+=====================
+PARSING IN CURSOR #140095687730576 len=42 dep=2 uid=124 oct=3 lid=124 tim=4008956196 hv=3124486527 ad='6cc2b778' sqlid='4dgyxz2x3rsbz'
+Select '2 : 2020-06-20 15:45:23' from Dual
+END OF STMT
+PARSE #140095687730576:c=488,e=488,p=0,cr=0,cu=0,mis=1,r=0,dep=2,og=1,plh=1388734953,tim=4008956196
+EXEC #140095687730576:c=11,e=12,p=0,cr=0,cu=0,mis=0,r=0,dep=2,og=1,plh=1388734953,tim=4008956251
+FETCH #140095687730576:c=2,e=2,p=0,cr=0,cu=0,mis=0,r=1,dep=2,og=1,plh=1388734953,tim=4008956273
+STAT #140095687730576 id=1 cnt=1 pid=0 pos=1 obj=0 op='FAST DUAL  (cr=0 pr=0 pw=0 str=1 time=1 us cost=2 size=0 card=1)'
+CLOSE #140095687730576:c=0,e=0,dep=2,type=3,tim=4008956374
+FETCH #140095687761008:c=789,e=789,p=0,cr=0,cu=0,mis=0,r=1,dep=1,og=1,plh=3084797639,tim=4008956405
+=====================
+PARSING IN CURSOR #140095687840808 len=42 dep=2 uid=124 oct=3 lid=124 tim=4008956927 hv=1339550802 ad='6cc276d0' sqlid='0tz4h2d7xgv2k'
+Select '3 : 2020-06-20 15:45:23' from Dual
+END OF STMT
+PARSE #140095687840808:c=10,e=452,p=0,cr=0,cu=0,mis=1,r=0,dep=2,og=1,plh=1388734953,tim=4008956927
+EXEC #140095687840808:c=11,e=11,p=0,cr=0,cu=0,mis=0,r=0,dep=2,og=1,plh=1388734953,tim=4008956980
+FETCH #140095687840808:c=2,e=2,p=0,cr=0,cu=0,mis=0,r=1,dep=2,og=1,plh=1388734953,tim=4008957001
+STAT #140095687840808 id=1 cnt=1 pid=0 pos=1 obj=0 op='FAST DUAL  (cr=0 pr=0 pw=0 str=1 time=0 us cost=2 size=0 card=1)'
+CLOSE #140095687840808:c=1,e=1,dep=2,type=3,tim=4008957052
+FETCH #140095687571848:c=189,e=631,p=0,cr=0,cu=0,mis=0,r=1,dep=1,og=1,plh=3084797639,tim=4008957066
+STAT #140095687571848 id=1 cnt=3 pid=0 pos=1 obj=0 op='COLLECTION ITERATOR PICKLER FETCH GET_DATE (cr=0 pr=0 pw=0 str=1 time=1650 us cost=29 size=12 card=6)'
+CLOSE #140095687571848:c=87,e=87,dep=1,type=3,tim=4008957176
+STAT #140095687761008 id=1 cnt=1 pid=0 pos=1 obj=0 op='COLLECTION ITERATOR PICKLER FETCH GET_DATE (cr=0 pr=0 pw=0 str=1 time=788 us cost=29 size=16336 card=8168)'
+CLOSE #140095687761008:c=73,e=73,dep=1,type=3,tim=4008957262
+EXEC #140095687589936:c=4144,e=4500,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=0,tim=4008957274
+WAIT #140095687589936: nam='SQL*Net message to client' ela= 1 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008957314
+WAIT #140095687589936: nam='SQL*Net message from client' ela= 289 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008957625
+PARSE #140095687503864:c=12,e=12,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=0,tim=4008957672
+BINDS #140095687503864:
+
+ Bind#0
+  oacdty=123 mxl=656(656) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=00 fl2=1400000 frm=00 csi=00 siz=680 off=0
+toid ptr value=6AF37390 length=16
+86B64B66F23D012EE053F706E80A06
+  kxsbbbfp=7f6a91b11408  bln=656  avl=00  flg=15
+ Bind#1
+  oacdty=02 mxl=22(22) mxlc=00 mal=00 scl=00 pre=00
+  oacflg=03 fl2=1000000 frm=00 csi=00 siz=0 off=656
+  kxsbbbfp=7f6a91b11698  bln=22  avl=02  flg=01
+  value=15
+WAIT #140095687503864: nam='SQL*Net message to client' ela= 0 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008957865
+EXEC #140095687503864:c=192,e=192,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=0,tim=4008957886
+WAIT #140095687503864: nam='SQL*Net message from client' ela= 409 driver id=1413697536 #bytes=1 p3=0 obj#=-1 tim=4008958320
+CLOSE #140095687589936:c=11,e=11,dep=0,type=0,tim=4008958372
+CLOSE #140095687503864:c=5,e=5,dep=0,type=3,tim=4008958403
+=====================
+PARSING IN CURSOR #140095687770480 len=68 dep=0 uid=124 oct=42 lid=124 tim=4008958442 hv=222310797 ad='0' sqlid='bb055g46n0ccd'
+alter session set events '10046 trace name context forever, level 0'
+END OF STMT
+PARSE #140095687770480:c=16,e=16,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=0,plh=0,tim=4008958442
+EXEC #140095687770480:c=324,e=324,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=0,plh=0,tim=4008958821
+PARSE #140095687503864:c=10,e=10,p=0,cr=0,cu=0,mis=0,r=0,dep=0,og=1,plh=0,tim=4008959098
+EXEC #140095687503864:c=69,e=69,p=0,cr=0,cu=0,mis=0,r=1,dep=0,og=1,plh=0,tim=4008959195
+XCTEND rlbk=0, rd_only=1, tim=4008959832
+CLOSE #140095687511960:c=0,e=3,dep=0,type=0,tim=4008959896
+CLOSE #140095687500456:c=0,e=1,dep=0,type=0,tim=4008959911
+CLOSE #140095687486200:c=0,e=1,dep=0,type=0,tim=4008959925
+CLOSE #140095687503864:c=0,e=4,dep=0,type=0,tim=4008959954
+CLOSE #140095687770480:c=0,e=0,dep=0,type=0,tim=4008959964
+CLOSE #140095688872144:c=0,e=1,dep=0,type=0,tim=4008959978
