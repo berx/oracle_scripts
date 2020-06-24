@@ -1,18 +1,18 @@
 ------------------------------------------------------------------------------
 --
--- File name:   islands.sql
+-- File name:   islands_gantt.sql
 -- Purpose:     Based on ASH, it gives islands of activity in an ocean of idle
 --              with a simple GANTT view.
 --              the primary concept comes from 
---              https://method-r.com/2014/02/17/connection-pool-response-times-with-method-r-tools-oceans-islands-and-rivers/
---              or 
---              https://de.slideshare.net/carymillsap/oceans-islands-rivers-etckey
+--              https://youtu.be/3ZlB9Jpjnw0?t=2474
+
 --              
 --              Some constants can be "set" at the beginning of the query the
 --              CONST CTE.
+--               GANTT_LENGTH defines how many characters the GANTT column will use.
 --              Reasonable FILTERS can be applied in the FILTER_FIRST CTE.
 --
---              have a look at http://berxblog.blogspot.com/2020/06/oceans-islands-and-rivers-in-ash.html
+--              have a look at http://berxblog.blogspot.com/2020/06/draw-gantt-chart-of-how-your-workload.html
 --              
 --              It can be easily adapted, e.g. for DBA_HIST_ACTIVE_SESS_HISTORY
 --
