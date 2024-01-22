@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='Cp1252'>
+  
+  <title>Result Data</title>
+  <link rel="stylesheet" href="extents.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <style>
+  * { 
+    margin: 0; 
+    padding: 0; 
+  }
+  body { 
+    font: 14px/1.4 Palatino, Serif; 
+  }
+  
+  /* 
+  Generic Styling, for Desktops/Laptops 
+  */
+  table { 
+    width: 100%; 
+    border-collapse: collapse; 
+  }
+  /* Zebra striping */
+  tr:nth-of-type(odd) { 
+    background: #eee; 
+  }
+  th { 
+    background: #333; 
+    color: white; 
+    font-weight: bold; 
+  }
+  td, th { 
+    padding: 6px; 
+    border: 1px solid #9B9B9B; 
+    text-align: left; 
+  }
+  @media 
+  only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+    table, thead, tbody, th, td, tr { display: block; }
+    thead tr { position: absolute;top: -9999px;left: -9999px;}
+    tr { border: 1px solid #9B9B9B; }
+    td { border: none;border-bottom: 1px solid #9B9B9B; position: relative;padding-left: 50%; }
+    
+    td:before { position: absolute;top: 6px;left: 6px;width: 45%; padding-right: 10px; white-space: nowrap;}
+    
+    /*
+    Label the data
+    */
+td:nth-of-type(1):before { content: "OWNER"; }
+td:nth-of-type(2):before { content: "SEGMENT_NAME"; }
+td:nth-of-type(3):before { content: "PARTITION_NAME"; }
+td:nth-of-type(4):before { content: "SEGMENT_TYPE"; }
+td:nth-of-type(5):before { content: "TABLESPACE_NAME"; }
+td:nth-of-type(6):before { content: "EXTENT_ID"; }
+td:nth-of-type(7):before { content: "FILE_ID"; }
+td:nth-of-type(8):before { content: "BLOCK_ID"; }
+td:nth-of-type(9):before { content: "BYTES"; }
+td:nth-of-type(10):before { content: "BLOCKS"; }
+td:nth-of-type(11):before { content: "RELATIVE_FNO"; }
+td:nth-of-type(12):before { content: "DATA_OBJECT_ID"; }
+td:nth-of-type(13):before { content: "OBJECT_ID"; }
+  }
+  
+  /* Smartphones (portrait and landscape) ----------- */
+  @media only screen
+  and (min-device-width : 320px)
+  and (max-device-width : 480px) {
+    body { 
+      padding: 0; 
+      margin: 0; 
+      width: 320px; }
+    }
+  
+  /* iPads (portrait and landscape) ----------- */
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body { 
+      width: 495px; 
+    }
+  }
+  
+  </style>
+  <!--<![endif]-->
+<script type="text/javascript">
+
+function search(){
+  
+  var s = document.getElementById('search').value;
+
+  rows = document.getElementById('data').getElementsByTagName('TR');
+  for(var i=0;i<rows.length;i++){
+    if ( rows[i].textContent.indexOf(s)>0  || s.length==0 ) {
+	  rows[i].style.display ='';
+    } else {
+      rows[i].style.display ='none';
+    }
+  }
+}
+
+
+var timer;
+function delayedSearch() {
+	clearTimeout(timer);
+	console.log('delay-ing')
+    timer = setTimeout(function () {
+		console.log('delay-running')
+		search();
+    }, 500);
+  }</script>
+</head>
+
+<body>
+<!--<script src="fragmentation.js">
+        <script type="text/javascript">
+        function codeAddress() {
+		  var body_el, svg_el;
+		  body_el = document.getElementsByTagName("body");
+		  svg_el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            body_el.appendchild(svg_el);
+
+
+			alert('ok');
+        }
+        window.onload = codeAddress;
+        </script>
+-->
+		
+<p id="debug"></p>
+
+ <svg id="data-visualization" width="3" height="3"></svg>
+
+<div><input type="text" size="30" maxlength="1000" value="" id="search" onkeyup="delayedSearch();" /><input type="button" value="Go" onclick="search();"/> </div>
+<table  id="data-table"><thead><tr>	<th>OWNER</th>
+	<th>SEGMENT_NAME</th>
+	<th>PARTITION_NAME</th>
+	<th>SEGMENT_TYPE</th>
+	<th>TABLESPACE_NAME</th>
+	<th>EXTENT_ID</th>
+	<th>FILE_ID</th>
+	<th>BLOCK_ID</th>
+	<th>BYTES</th>
+	<th>BLOCKS</th>
+	<th>RELATIVE_FNO</th>
+	<th>DATA_OBJECT_ID</th>
+	<th>OBJECT_ID</th>
+</tr></thead>
+<tbody id="data">
+
+	<tr>
+<td>USER_1</td>
+<td>T_LOB</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">777</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">91816</td>
+<td align="right">91809</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>OBJ</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">632</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">105184</td>
+<td align="right">105184</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>MY_SFLOBS</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">608</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">104631</td>
+<td align="right">104631</td>
+	</tr>
+	<tr>
+<td>USER_3</td>
+<td>TABLE_NAME_x_TABLE_NAME_y</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">600</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">101962</td>
+<td align="right">101962</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>TEST_EXT_VC2_INLINE</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">584</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">89139</td>
+<td align="right">89139</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>TEST_EXT_VC2_CLOB</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">376</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">89136</td>
+<td align="right">89136</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>TEST_CLOBS_INLINE</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">360</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">89133</td>
+<td align="right">89133</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>TEST_CLOBS_NOINLINE</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">312</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">89130</td>
+<td align="right">89130</td>
+	</tr>
+	<tr>
+<td>USER_3</td>
+<td>TABLE_NAME_y_PK</td>
+<td>&nbsp;</td>
+<td>INDEX</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">304</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">101961</td>
+<td align="right">101961</td>
+	</tr>
+	<tr>
+<td>USER_3</td>
+<td>TABLE_NAME_y</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">296</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">101960</td>
+<td align="right">101960</td>
+	</tr>
+	<tr>
+<td>USER_2</td>
+<td>TABLE_NAME_x_PK</td>
+<td>&nbsp;</td>
+<td>INDEX</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">288</td>
+<td align="right">65536</td>
+<td align="right">16</td>
+<td align="right">15</td>
+<td align="right">101959</td>
+<td align="right">101959</td>
+	</tr>
+	<tr>
+<td>USER_3</td>
+<td>TABLE_NAME_x</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">280</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">101958</td>
+<td align="right">101958</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>MY_SQL_PLAN</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">272</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">100355</td>
+<td align="right">100355</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>SYS_RESERVJRNL_98174</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">216</td>
+<td align="right">65536</td>
+<td align="right">16</td>
+<td align="right">15</td>
+<td align="right">98175</td>
+<td align="right">98175</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>SYS_C008246</td>
+<td>&nbsp;</td>
+<td>INDEX</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">208</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">98176</td>
+<td align="right">98176</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>TICKETSALES</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">200</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">98174</td>
+<td align="right">98174</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>BLOCK_ME</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">160</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">97617</td>
+<td align="right">97617</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>T1</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">152</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">82712</td>
+<td align="right">82712</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>INFINITY</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">2</td>
+<td align="right">15</td>
+<td align="right">144</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">78419</td>
+<td align="right">78419</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>INFINITY</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">1</td>
+<td align="right">15</td>
+<td align="right">136</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">78419</td>
+<td align="right">78419</td>
+	</tr>
+	<tr>
+<td>BERX</td>
+<td>INFINITY</td>
+<td>&nbsp;</td>
+<td>TABLE</td>
+<td>USERS</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">128</td>
+<td align="right">65536</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">78419</td>
+<td align="right">78419</td>
+	</tr>
+</tbody></table><!-- SQL:
+select de.* , do.data_object_id,  do.object_id
+from dba_extents de
+join dba_objects do
+on de.owner = do.owner
+  and de.segment_name = do.object_name
+  and de.segment_type = do.object_type
+  and decode(de.partition_name, do.subobject_name, 0, 1) = 0
+where 1=1
+--  and tablespace_name='USERS'
+  and de.file_id=15
+order by block_ID desc-->
+
+// this script must be at the bottom .... 
+ <script src="extents.js"></script>
+
+</body></html>
